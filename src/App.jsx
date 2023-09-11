@@ -5,6 +5,7 @@ import {
   getLocalStorage,
   saveLocalStorage,
 } from './assets/LS';
+import LSbottle from './components/LSbottle';
 
 function App() {
   const [data, setData] = useState([]);
@@ -28,6 +29,9 @@ function App() {
   const handleRemove = (id) => {
     const filerData = data.filter((item) => item.id !== id);
     setData(filerData);
+
+    const updateLocalStorage = localStorage.filter((itemId) => itemId !== id);
+    setLocalStorage(updateLocalStorage);
   };
 
   const handlePurchase = (id) => {
@@ -46,6 +50,7 @@ function App() {
       <h1>Count the purchase : {purchase.length}</h1>
       <h1>Count the Product : {data.length}</h1>
       <h1>Local Storage length : {localStorage.length}</h1>
+      <LSbottle localStorage={localStorage} data={data} />
       <div className="grid grid-cols-3">
         {data.map((perData) => (
           <Bottle
